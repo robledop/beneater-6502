@@ -23,13 +23,8 @@
 ; the EEPROM would be disabled. To fix that, we can invert the signal coming from the address 
 ; line 16 from the 6502 to the chip enable pin on the EEPROM. This way the 6502 will actually access 
 ; addresses 0x8000 to 0xffff from the EEPROM (where the addresses 0xfffc and 0xfffd reside), and the 
-; first half of the address space will be free to be used with something else. That will be kind of 
-; weird because what is address 0x0000 from the perspective of the EEPROM will actually be address 0x8000 
-; from the perspective of the 6502.
-; 
-; 6502 and 6522
-; =============
-;
+; first half of the addr
+    lda #(RW | E)
 ; The 6522 will be active when the 6502 points to any address between 0x6000 (0110 0000 0000 0000) 
 ; and 0x7ff (0111 1111 1111 1111). What matters are the first 3 bits, they must be 011 in order for 
 ; the chip select pins on the 6522 to be high. The rest of the address is being ignored for simplicity.
